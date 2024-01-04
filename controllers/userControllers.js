@@ -16,11 +16,11 @@ exports.generateOTP = catchAsyncError(async(req,res,next)=>{
     }
 
     //Get ResetPassword Token
-    const OTP = user.createOTP();
-
+     const OTP= await user.createOTP();
+    console.log(OTP);
     await user.save({validateBefoeSave:false});
 
-    const message = `Your Password reset token is :- \n ${OTP} \n\n If you have not requested this email
+    const message = `Your OTP is :- \n ${OTP} \n\n If you have not requested this email
     then, Please ignore it`;
 
     try {
@@ -28,7 +28,7 @@ exports.generateOTP = catchAsyncError(async(req,res,next)=>{
         await sendEmail({
 
             email:user.email,
-            subject:"OTP Verification Kaash Lights",
+            subject:"OTP Verification Carbon Calculator",
             message,
 
         });
@@ -62,7 +62,7 @@ exports.verifyOTP = catchAsyncError(async(req,res,next)=>{
         return next(new ErrorHandler("OTP for email verfication is invalid or has been expired",404));
     }
 
-    user.oto = undefined; // we making this undefined because we already saved the otp in our Database and here request failed so we need to reset fields.
+    user.otp = undefined; // we making this undefined because we already saved the otp in our Database and here request failed so we need to reset fields.
     user.expiresIn = undefined;
 
     await user.save();

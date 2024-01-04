@@ -25,7 +25,7 @@ userSchema.methods.createOTP=async function(){
     const OTP = Math.floor(1000 + Math.random() * 9000);
 
     this.otp = OTP;
-    this.expiresIn = Date.now() + 15*60*1000;
+    this.expiresIn = Date.now() + 5*60*1000;
 
     return OTP;
 }

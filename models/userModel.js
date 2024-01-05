@@ -22,7 +22,7 @@ const userSchema=new mongoose.Schema({
 })
 
 userSchema.methods.createOTP=async function(){
-    const OTP = Math.floor(1000 + Math.random() * 9000);
+    const OTP = Math.floor(10000 + Math.random() * 90000);
 
     this.otp = OTP;
     this.expiresIn = Date.now() + 5*60*1000;

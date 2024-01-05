@@ -17,7 +17,7 @@ exports.generateOTP = catchAsyncError(async(req,res,next)=>{
 
     //Get ResetPassword Token
      const OTP= await user.createOTP();
-    console.log(OTP);
+
     await user.save({validateBefoeSave:false});
 
     const message = `Your OTP is :- \n ${OTP} \n\n If you have not requested this email
@@ -52,6 +52,8 @@ exports.generateOTP = catchAsyncError(async(req,res,next)=>{
 exports.verifyOTP = catchAsyncError(async(req,res,next)=>{
 
     const otp = req.body.otp;
+    console.log(otp);
+    console.log(req.body.email);
 
     const user = await User.findOne({
         otp,

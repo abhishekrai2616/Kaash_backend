@@ -12,12 +12,24 @@ const sendEmail = async(options) =>{ // this will the credentials from which acc
         }
     });
 
-    const mailOptions = {
-        from:process.env.SMPT_MAIL,
-        to:options.email,
-        subject:options.subject,
-        text:options.message
-    };
+    let mailOptions ;
+    if(options.attachments){
+        mailOptions = {
+            from:process.env.SMPT_MAIL,
+            to:options.email,
+            subject:options.subject,
+            text:options.message,
+            attachments:options.attachments
+        }; 
+
+    }else{
+       mailOptions = {
+            from:process.env.SMPT_MAIL,
+            to:options.email,
+            subject:options.subject,
+            text:options.message
+        };
+    }
 
     await transporter.sendMail(mailOptions);  // this is used to send the mail
 

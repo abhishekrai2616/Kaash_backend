@@ -2,7 +2,6 @@ const User=require('../models/userModel');
 const catchAsyncError=require('../middlewares/catchAsyncError');
 const ErrorHandler=require('../utils/errorHandler');
 const sendEmail=require('../utils/nodemailer');
-const crypto=require('crypto');
 
 exports.generateOTP = catchAsyncError(async(req,res,next)=>{
 
@@ -52,7 +51,6 @@ exports.generateOTP = catchAsyncError(async(req,res,next)=>{
 exports.verifyOTP = catchAsyncError(async(req,res,next)=>{
 
     const otp = req.body.otp;
-    console.log(otp);
     console.log(req.body.email);
 
     const user = await User.findOne({
